@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import FormData from "form-data";
 import { useSellerId } from "../../../Theme1/Contexts/SellerContext";
+import { useToken } from "../../Contexts/token";
 
 function Textfield(props) {
   return (
@@ -24,12 +25,9 @@ function Textfield(props) {
   
 function AddPromoCode(props){ 
   
-var Usr = localStorage.getItem('User')
-Usr = JSON.parse(Usr)
-  const headers = {
-    'Authorization': Usr.token
-  }
+
     let Sid=useSellerId()
+    let headers = useToken()
 const submit = (e) => {
     e.preventDefault();
     console.log(e.target[0].value);
@@ -43,6 +41,7 @@ const submit = (e) => {
     axios.put("/api/CreatePromoCode/"+Sid, data,{headers:headers}).then((data) => {
       console.log(data);
       alert("Success");
+      window.location.href = ('/admin/PromoCode')
     });
   };
 

@@ -19,12 +19,12 @@ function App() {
           domainArr.length==1 ? 
           <Routes>
           <Route exact path="/*" element={<PublicMain/>} >   </Route>
-          <Route path={"/adminAD/*"} element={<AdminAD/>} ></Route>  
+          <Route path={"/admin/*"} element={<AdminAD/>} ></Route>  
           </Routes>
          :  
          <Routes>
          <Route exact path="/*" element={<Theme1 domain={subDomain}/>} ></Route>
-         <Route exact path={"/adminS/*"} element={<AdminS />} ></Route>  
+         <Route exact path={"/admin/*"} element={<AdminS />} ></Route>  
          </Routes>
         }
       </Router>

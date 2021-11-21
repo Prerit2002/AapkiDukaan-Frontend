@@ -2,6 +2,8 @@ import React from 'react'
 import CartProvider from './Contexts/CartContext'
 import Main from './main'
 import SellerDataProvider from './Contexts/SellerContext'
+import TokenProvider from '../Admin-S/Contexts/token'
+import CustomerProvider from './Contexts/CustomerContext'
 
 function Theme1() {
     let Categories = [
@@ -39,13 +41,14 @@ function Theme1() {
         }
     ]
     return (
+        
         <SellerDataProvider>
         <CartProvider>
+        <CustomerProvider >
         <div className="overflow-hidden"> 
-         
             <Main Arr={Categories}/>
-            
         </div>
+        </CustomerProvider >
         </CartProvider>
         </SellerDataProvider>
     )

@@ -8,10 +8,12 @@ import Login from '../Components/Login';
 import TabsTable from '../Components/TabsTable';
 import WebsiteSettings from './Components/Website';
 import AddProduct from '../Components/AddProduct';
+import TokenProvider from './Contexts/token'
 import SellerDataProvider, { useSellerData, useSellerId } from '../Theme1/Contexts/SellerContext';
 import PromoCode from './Components/PromoCode';
 import AddPromoCode from './Components/AddPromo';
 import axios from 'axios';
+import Logout from '../Components/Logout';
 function AdminS() {
   const Menu = [
    
@@ -43,17 +45,21 @@ function AdminS() {
   ]
   let User = localStorage.getItem('User')
   let Sid = useSellerId()
-  let Sdata= useSellerData()
-
+  var full = window.location.host
+  var parts = full.split('.')
+  var sub = parts[0]
   return (
  
     <div className="App">
          <SellerDataProvider>
         <div className="p-0 m-0 flex">
           <Sidebar Menu={Menu}/>
+          <TokenProvider>
           <div className="m-10 p-2">
+            Welcome User, Proceed to use the Admin Panel
           {
-              User ? <Routes>
+              User ? 
+              <Routes>
               <Route exact path="sales" element={<Sales />}  ></Route>
               <Route exact path="customers" element={<Customers />}  ></Route>
               <Route exact path="bills" element={<Bills />}  ></Route>
@@ -62,12 +68,14 @@ function AdminS() {
               <Route exact path="test" element={<TabsTable />}  ></Route>
               <Route exact path="PromoCode/add" element={<AddPromoCode/>}  ></Route>
               <Route exact path="promocode" element={<PromoCode />}  ></Route>
-              <Route exact path="settings" element={<WebsiteSettings id={Sid} data={Sdata}/>}  ></Route>
+              <Route exact path="logout" element={<Logout />}  ></Route>
+              <Route exact path="settings" element={<WebsiteSettings id={Sid}/>}  ></Route>
               </Routes> : <Routes>
-              <Route path="/*" element={<Login role="Seller"/>}  ></Route>  
+              <Route path="/*" element={<Login role="Seller" domain={sub}/>}  ></Route>  
                 </Routes>
           }
         </div>
+        </TokenProvider>
         </div>
         </SellerDataProvider>
     </div>

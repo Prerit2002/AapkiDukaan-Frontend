@@ -4,13 +4,15 @@ import { JsonToTable } from "react-json-to-table";
 import axios from 'axios';
 import { useSellerData, useSellerId } from '../../Theme1/Contexts/SellerContext';
 import { Link } from 'react-router-dom';
+import { useToken } from '../../Admin-S/Contexts/token';
 function Client() {
     let Sid=useSellerId()
     const [isLoading, setisLoading] = useState(true)
     const [Client, setClient] = useState({
     })
+    let headers = useToken()
     useEffect(() => {
-       axios.get("/api/showClient/").then(data=>{
+       axios.get("/api/showClient/",{headers: headers}).then(data=>{
            console.log(data.data)
            let client = data.data.map((el)=>{
                return (

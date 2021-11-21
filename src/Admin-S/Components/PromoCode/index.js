@@ -7,20 +7,23 @@ import {
     useSellerId,
   } from "../../../Theme1/Contexts/SellerContext"
 import { Link } from 'react-router-dom';
+import { useToken } from '../../Contexts/token';
 function PromoCode() {
     let Sid=useSellerId()
     const [isLoading, setisLoading] = useState(true)
     const [PromoCode, setPromoCode] = useState({
     })
+    let headers = useToken()
+
     useEffect(() => {
-       axios.get("/api/GetPromoCode/"+Sid).then(data=>{
+       axios.get("/api/GetPromoCode/"+Sid,{headers: headers}).then(data=>{
            setPromoCode(data.data)
            setisLoading(false)
 
        })
     }, [])
     const Delete = (row) =>{
-        axios.put("/api/DeletePromo/"+Sid,{id : row._id}).then(()=>{
+        axios.put("/api/DeletePromo/"+Sid,{id : row._id},{headers: headers}).then(()=>{
             alert('Delete Successly')
             window.location.reload()
         })

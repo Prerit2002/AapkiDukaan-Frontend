@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import Login from "../../../Components/Login";
 import OrderHistory from "../OrderHistory";
 function TextFieldForm(props) {
   return (
@@ -14,6 +16,7 @@ function TextFieldForm(props) {
         name={props.name}
         id={props.id}
         autoComplete={props.oc}
+        value={props.value}
         className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
       />
     </div>
@@ -21,14 +24,13 @@ function TextFieldForm(props) {
 }
 export function AccountBox (props) {
   return (
-    <form action="#" method="POST">
     <div className="shadow overflow-hidden sm:rounded-md">
       <div className="px-4 py-5 bg-white sm:p-6">
         <div className="grid grid-cols-3 gap-6">
           <TextFieldForm
             type="text"
             label="First Name"
-            name="first-name"
+            name="FirstName"
             id="first-name"
             oc="given-name"
           />
@@ -36,86 +38,63 @@ export function AccountBox (props) {
           <TextFieldForm
             type="text"
             label="Last Name"
-            name="last-name"
+            name="LastName"
             id="last-name"
             oc="family-name"
           />
 
           <TextFieldForm
             type="text"
-            label="Email Address"
-            name="email-address"
-            id="email-address"
-            oc="email"
+            label="UserName"
+            name="Username"
+
           />
-          
-     
-
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="country"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Country
-            </label>
-            <select
-            
-              id="country"
-              name="country"
-              autoComplete="country-name"
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option>India</option>
-              <option>Canada</option>
-              <option>Mexico</option>
-            </select>
-          </div>
-
           <TextFieldForm
             type="number"
             label="Phone Number"
-            name="phone-number"
+            name="PhoneNo"
             id="phone-number"
             oc="phone"
           />
           <TextFieldForm
             type="text"
-            label="Street address"
-            name="street-address"
-            id="street-address"
-            oc="street-address"
+            label="Street Address"
+            name="Street"
+            id="Address"
           />
 
+          <TextFieldForm
+            type="text"
+            label="State"
+            name="State"
+            id="Address"
+          />
+          <TextFieldForm
+            type="number"
+            label="PinCode"
+            name="Address"
+            id="Address"
+          />
           <TextFieldForm
             type="text"
             label="City"
-            name="city"
-            id="city"
-            oc="city"
+            name="City"
+            id="Address"
+          />
+            <TextFieldForm
+            type="Password"
+            label="Password"
+            name="Password"
+            id="Password"
           />
 
-          <TextFieldForm
-            type="text"
-            label=" State / Province"
-            name="region"
-            id="region"
-            oc="region"
-          />
-
-          <TextFieldForm
-            type="text"
-            label="  ZIP / Postal code"
-            name="postal-code"
-            id="postal-code"
-            oc="postal-code"
-          />
         </div>
       </div>
       <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
         {
           props.save ?    <button
           type="submit"
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Save
         </button> : null
@@ -123,28 +102,49 @@ export function AccountBox (props) {
      
       </div>
     </div>
-  </form>
   )
 }
 function Account() {
   return (
-    <div>
+    <div className>
+      <div className="">
       <div className="mt-10 sm:mt-0 text-left">
         <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Personal Information
-              </h3>
-              <p className="mt-1 text-sm text-gray-600">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 md:mt-0 md:col-span-2">
-           <AccountBox save={true}/>
+          {
+            !localStorage.getItem('User') ? <div className=" -mt-24">
+            <Login role="Customer"/>
+            </div> : null
+          }
+          
+            <div className="mt-5 md:mt-0 md:col-span-2">
+              <p className=" text-2xl m-2">Register</p>
+          <form onSubmit={
+               e=> {
+                e.preventDefault()
+                const Article = {
+                    FirstName : e.target[0].value,
+                    LastName : e.target[1].value,
+                    Username : e.target[2].value,
+                    PhoneNo : e.target[3].value,
+                    Street : e.target[4].value,
+                    State : e.target[5].value,
+                    Pincode : e.target[6].value,
+                    City : e.target[7].value ,
+                    Password : e.target[8].value,
+                }
+                console.log(Article)
+                axios.post('/api/create/Customer',Article).then(()=>{
+                  alert('Succesful')
+                  window.location.reload()
+                })
+               }
+          }>
+           <AccountBox save={true} />
+           </form >
           </div>
         </div>
+      </div>
+              
       </div>
       <div className="mt-10">
       <OrderHistory />

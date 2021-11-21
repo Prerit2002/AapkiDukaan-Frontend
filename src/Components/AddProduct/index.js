@@ -5,6 +5,7 @@ import {
   useSellerData,
   useSellerId,
 } from "../../Theme1/Contexts/SellerContext";
+import { useToken } from "../../Admin-S/Contexts/token";
 function Textfield(props) {
   return (
     <div className="col-span-6 sm:col-span-3">
@@ -25,6 +26,7 @@ function Textfield(props) {
 }
 function AddProduct() {
   let sid = useSellerId();
+  let headers = useToken();
   let { Categories } = useSellerData();
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
@@ -51,7 +53,8 @@ function AddProduct() {
     axios.post("/upload", formData, config).then((data) => {
       console.log(data);
       setImgUrl(data.data.url);
-    });
+      alert('Uploaded, now Submit')
+    })
   }
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
@@ -75,9 +78,10 @@ function AddProduct() {
       Category: e.target[2].value,
       Photo: imgUrl,
     };
-    axios.put("/api/createProduct", data).then((data) => {
+    axios.put("/api/createProduct", data,{headers : headers}).then((data) => {
       console.log(data);
       alert("Success");
+      window.location.href = "/admin/inventory"
     });
   };
 
@@ -127,7 +131,7 @@ function AddProduct() {
                   <input
                     type="file"
                     onChange={onChangePicture}
-                    accept="image/*"
+                    accept="image/x-png,image/gif,image/jpeg" 
                   />
                   {imgData === null ? (
                     <>
@@ -138,19 +142,20 @@ function AddProduct() {
                   ) : (
                     <div className="text-center">
                       <img
-                        className=" text-center "
+                        className=" text-center max-w-sm m-2  border border-darkGrey border-opacity-40"
                         src={imgData}
                         type="image"
                         alt="Productimage"
                         required
                       />
                       <button
+                      className="p-2 rounded-md bg-lightgreen text-white"
                         onClick={(e) => {
                           e.preventDefault();
                           Upload();
                         }}
                       >
-                        Submit
+                        Upload Image
                       </button>
                     </div>
                   )}
