@@ -11,12 +11,10 @@ import AddProduct from '../Components/AddProduct';
 import SellerDataProvider, { useSellerData, useSellerId } from '../Theme1/Contexts/SellerContext';
 import PromoCode from './Components/PromoCode';
 import AddPromoCode from './Components/AddPromo';
+import axios from 'axios';
 function AdminS() {
   const Menu = [
-    {
-      link: "website",
-      text: "Website",
-    },
+   
     {
       link: "inventory",
       text: "Inventory",
@@ -25,10 +23,7 @@ function AdminS() {
       link: "sales",
       text: "Sales",
     },
-    {
-      link: "customers",
-      text: "Customers",
-    },
+  ,
     {
       link: "bills",
       text: "Bills",
@@ -42,10 +37,14 @@ function AdminS() {
       text: "Settings",
     },
     {
-      link: "Login",
-      text: "Login",
+      link: "Logout",
+      text: "Logout",
     },
   ]
+  let User = localStorage.getItem('User')
+  let Sid = useSellerId()
+  let Sdata= useSellerData()
+
   return (
  
     <div className="App">
@@ -53,18 +52,21 @@ function AdminS() {
         <div className="p-0 m-0 flex">
           <Sidebar Menu={Menu}/>
           <div className="m-10 p-2">
-          <Routes>
-        <Route exact path="sales" element={<Sales />}  ></Route>
-        <Route exact path="customers" element={<Customers />}  ></Route>
-        <Route exact path="bills" element={<Bills />}  ></Route>
-        <Route exact path="inventory" element={<Inventory />}  ></Route>
-        <Route exact path="inventory/add" element={<AddProduct />}  ></Route>
-        <Route exact path="test" element={<TabsTable />}  ></Route>
-        <Route exact path="PromoCode/add" element={<AddPromoCode />}  ></Route>
-        <Route exact path="promocode" element={<PromoCode />}  ></Route>
-        <Route exact path="settings" element={<WebsiteSettings id={useSellerId()} data={useSellerData()}/>}  ></Route>
-        {/* <Route exact path="Login" element={<Login />}  ></Route> */}
-        </Routes>
+          {
+              User ? <Routes>
+              <Route exact path="sales" element={<Sales />}  ></Route>
+              <Route exact path="customers" element={<Customers />}  ></Route>
+              <Route exact path="bills" element={<Bills />}  ></Route>
+              <Route exact path="inventory" element={<Inventory />}  ></Route>
+              <Route exact path="inventory/add" element={<AddProduct />}  ></Route>
+              <Route exact path="test" element={<TabsTable />}  ></Route>
+              <Route exact path="PromoCode/add" element={<AddPromoCode/>}  ></Route>
+              <Route exact path="promocode" element={<PromoCode />}  ></Route>
+              <Route exact path="settings" element={<WebsiteSettings id={Sid} data={Sdata}/>}  ></Route>
+              </Routes> : <Routes>
+              <Route path="/*" element={<Login role="Seller"/>}  ></Route>  
+                </Routes>
+          }
         </div>
         </div>
         </SellerDataProvider>

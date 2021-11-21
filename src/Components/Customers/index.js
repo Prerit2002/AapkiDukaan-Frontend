@@ -24,9 +24,7 @@ function Customer() {
            setisLoading(false)
        })
     }, [])
-    const Delete = (row) =>{
-        console.log(row)
-    }
+  
     if(isLoading) {
         return (
             <div>Loading</div>
@@ -38,7 +36,7 @@ function Customer() {
         <div className="w-full  m-10">
         <h1 className="text-3xl m-4 text-left">Customers</h1>
             <div className=" overflow-x-scroll max-w-screen-lg">
-            <UnivTable Responses={Customer} Delete={Delete}/>  
+            <UnivTable Responses={Customer} />  
             </div>
         
     </div>

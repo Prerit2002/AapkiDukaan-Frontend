@@ -22,7 +22,13 @@ function Textfield(props) {
   );
 }
   
-function AddPromoCode(){ 
+function AddPromoCode(props){ 
+  
+var Usr = localStorage.getItem('User')
+Usr = JSON.parse(Usr)
+  const headers = {
+    'Authorization': Usr.token
+  }
     let Sid=useSellerId()
 const submit = (e) => {
     e.preventDefault();
@@ -30,12 +36,11 @@ const submit = (e) => {
     let data = {
       Code: e.target[0].value,
       Discount: e.target[1].value,
-  
       MaxDiscount: e.target[2].value,
-   
     };
+   
     console.log(data)
-    axios.put("/api/CreatePromoCode/"+Sid, data).then((data) => {
+    axios.put("/api/CreatePromoCode/"+Sid, data,{headers:headers}).then((data) => {
       console.log(data);
       alert("Success");
     });

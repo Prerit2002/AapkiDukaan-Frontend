@@ -20,8 +20,11 @@ function PromoCode() {
        })
     }, [])
     const Delete = (row) =>{
-        console.log(row)
-    }
+        axios.put("/api/DeletePromo/"+Sid,{id : row._id}).then(()=>{
+            alert('Delete Successly')
+            window.location.reload()
+        })
+     }
     if(isLoading) {
         return (
             <div>Loading</div>

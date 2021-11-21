@@ -11,10 +11,7 @@ import Clients from '../Components/Clients';
 import ProductPool from '../Components/AdminProductPool/index copy';
 function AdminAD() {
   const Menu = [
-    {
-      link: "website",
-      text: "Website",
-    },
+  
     {
       link: "productpool",
       text: "Inventory",
@@ -44,8 +41,8 @@ function AdminAD() {
       text: "Settings",
     },
     {
-      link: "Login",
-      text: "Login",
+      link: "Logout",
+      text: "Logout",
     },
   ]
   return (

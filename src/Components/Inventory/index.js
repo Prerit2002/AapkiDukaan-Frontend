@@ -24,7 +24,10 @@ function Inventory() {
        })
     }, [])
     const Delete = (row) =>{
-        console.log(row)
+       axios.put("/api/DeleteProducts/"+Sid,{id : row._id}).then(()=>{
+           alert('Delete Successly')
+           window.location.reload()
+       })
     }
     if(isLoading) {
         return (
