@@ -47,10 +47,7 @@ function SideElements(props) {
     return (
         <div>
         <CatMenuV Arr={Categories} title="Categories" />
-        <div className="mt-10">
-        <h1 className="text-xl mb-5 text-left">Filter by Rating</h1>
-        <Rating ratingValue={rating} /* Rating Props */ />
-        </div>
+  
         <div className="mt-10">
         <h1 className="text-xl mb-5 text-left">Filter by Price Range</h1>
         <Range min={0} max={100000}  tipFormatter={value => `${value}%`} value={value} onChange={(value)=>{

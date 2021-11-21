@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './Components/About';
+import BecomeExecutive from './Components/BecomeExecutive';
 import Home from './Components/Homepage';
 import Login from './Components/Login';
 import Navbar from './Components/Navbar';
@@ -18,6 +19,7 @@ function PublicMain() {
         <Route path="pricing" element={<Pricing />} ></Route>
         <Route path="login" element={<Login />} ></Route>
         <Route path="signup" element={<SignUp />} ></Route>
+        <Route path="BecomeExecutive" element={<BecomeExecutive />} ></Route>
         </Routes>
         </div>
 
