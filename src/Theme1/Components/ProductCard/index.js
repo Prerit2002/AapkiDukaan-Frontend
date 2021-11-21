@@ -31,10 +31,10 @@ function ProductCard(props) {
         <div className="mt-2 mx-3 flex flex-col text-left justify-between">
           
             <h3 className="text-sm text-gray-700 opacity-70">
-              <a href={'product/'+product._id}>
+              <Link to={'product/'+product._id}>
                 <span aria-hidden="true" className="absolute inset-0" />
                 {product.Name}
-              </a>
+              </Link>
             </h3>
             
             <div className="flex flex-row justify-between">

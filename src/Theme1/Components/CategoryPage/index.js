@@ -28,7 +28,7 @@ function CategoryPage(props) {
         <h2 className="text-4xl text-left font-bold">Food & Dairy</h2>
         <div className="flex flex-row ">
             <SideElements />
-            <div className="mx-10 flex-grow-1 grid grid-cols-1">
+            <div className="mx-10 grid grid-cols-1 w-full">
             <ProductCardH product={product}/>
             <ProductCardH product={product}/>
             <ProductCardH product={product}/>

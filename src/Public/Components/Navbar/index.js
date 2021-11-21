@@ -17,7 +17,7 @@ function Menu() {
       },
       {
         text: "Become an Executive",
-        url: "executive",
+        url: "BecomeExecutive",
       }
     ].map((el) => {
       return (
