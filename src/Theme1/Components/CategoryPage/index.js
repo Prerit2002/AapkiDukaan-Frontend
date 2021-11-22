@@ -1,37 +1,30 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { useSellerId } from '../../Contexts/SellerContext'
 import ProductCardH from '../ProductCardH'
 import SideElements from '../Sidebar'
 
-function CategoryPage(props) {
-    const product = 
-    [ 
-    {
-      id: 1,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    },
-    {id: 2,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://www.netcetra.com/images/howto_images/photoshop-logo.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    }
-]
+function CategoryPage() {
+    let {id} = useParams()
+    const [Products, setProducts] = useState([])
+    let Sid  = useSellerId()
+    useEffect(() => {
+        axios.put('/api/findProductsbyCategory/'+Sid,{"Category":id}).then((data)=>{
+            setProducts(data.data)
+        })
+    },[])
+    const [StartV, setStartV] = useState(0)
+    const [EndV, setEndV] = useState(20000)
     return (
         <>
-        <h2 className="text-4xl text-left font-bold">Food & Dairy</h2>
+        <h2 className="text-4xl text-left font-bold">{id}</h2>
         <div className="flex flex-row ">
-            <SideElements />
+            <SideElements StartV={StartV} EndV={EndV} setStartV={setStartV} setEndV={setEndV}/>
             <div className="mx-10 grid grid-cols-1 w-full">
-            <ProductCardH product={product}/>
-            <ProductCardH product={product}/>
-            <ProductCardH product={product}/>
+            {Products.map(el=>{
+               return <ProductCardH product={el}/>
+            })}
             </div>
         </div>
         </>

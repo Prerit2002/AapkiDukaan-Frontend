@@ -1,8 +1,11 @@
 import {React, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating'
+import { useCartUpdate } from '../../Contexts/CartContext'
 
 function ProductCardH(props) {
+  const AddProduct = useCartUpdate().AddProduct
+  console.log(props.product)
     return (
         <div className="border-2 border-searchBarGrey rounded-lg m-2 p-2 w-full">
         <div className="h-50">
@@ -18,7 +21,7 @@ function ProductCardH(props) {
             <h3 className="text-sm text-gray-700 font-bold">
               <Link to={'products/'+props.product._id}>
                 <span aria-hidden="true"  />
-                {props.product[0].name}
+                {props.product.Name}
               </Link>
             </h3>
         </div>
@@ -26,6 +29,10 @@ function ProductCardH(props) {
             <p className=" text-left text-3xl font-bold  text-gray-900 py-2 px-4 ">{props.product.Price + " ₹"}</p>
             <button
                 type="submit"
+                onClick={e=>{
+                  e.preventDefault()
+                  AddProduct(props.product)
+              }}
                 className="justify-center bg-theme text-w py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               > Add to Cart
               </button>

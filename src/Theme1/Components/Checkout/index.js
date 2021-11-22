@@ -9,6 +9,8 @@ import {
 } from "../../Contexts/CartContext";
 import { Link } from "react-router-dom";
 import Textfield from "../FormComponents/textfield";
+import axios from "axios";
+import { useSellerId } from "../../Contexts/SellerContext";
 
 function Checkout() {
   const products = useCart();
@@ -16,9 +18,13 @@ function Checkout() {
   let total = 0;
   products.forEach((element) => {
     total += parseInt(element.Price);
+    // setTotal(total)
   });
+  const [Total, setTotal] = useState(total)
   const RemoveProduct = CartUpdate.RemoveProduct;
   const [Promo, setPromo] = useState("");
+  const [Applied, setApplied] = useState(false)
+  let id = useSellerId();
   return (
     <div>
       <p className="text-left text-2xl m-2">Checkout </p>
@@ -87,6 +93,18 @@ function Checkout() {
                       <p>Subtotal</p>
                       <p>{total}</p>
                     </div>
+                    {Applied ?
+                    
+                    <div>
+                      <p>{Promo} has been Applied</p>
+                      <button onClick={e=>{
+                        e.preventDefault()
+                        setPromo("")
+                        setTotal(total)
+                        setApplied(false)
+                      }}>Remove</button>
+                     </div> 
+                        : 
                     <div className="mt-6  justify-center text-sm text-center text-gray-500">
                       <p className="text-left mx-2">Apply Promo Code</p>
                       <div className="flex m-2 ">
@@ -97,14 +115,24 @@ function Checkout() {
                         />
                         <button
                           onClick={(e) => {
-                            e.preventDefault();
+                            e.preventDefault()
+                            axios.put("/api/checkpromo/"+id,{
+                              Code : Promo,
+                              Total : total
+                            }).then((data)=>{
+                                console.log(data.data)
+                                setTotal(data.data.NewTotal)
+                                setApplied(true)
+                            }).catch(e=>{
+                              alert('Invalid Promo Code')
+                            })
                             console.log(Promo);
                           }}
                           className=" bg-theme mx-2  border rounded-lg text-white p-2 ">
                           Apply
                         </button>
                       </div>
-                    </div>
+                    </div> }
                     <div className="border-t border-gray-200 mt-5 ">
                       {/* <div className="flex mt-5 justify-between text-base font-medium text-gray-900">
                         <p>Promo Code Appplied : {}</p>
@@ -112,7 +140,7 @@ function Checkout() {
                       </div> */}
                       <div className="flex mt-5 justify-between text-base font-medium text-gray-900">
                         <p>Total</p>
-                        <p>{total}</p>
+                        <p>{Total}</p>
                       </div>
                     </div>
 
