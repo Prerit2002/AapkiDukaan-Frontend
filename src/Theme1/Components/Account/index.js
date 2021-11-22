@@ -115,7 +115,6 @@ function Account() {
             <Login role="Customer"/>
             </div> : null
           }
-          
             <div className="mt-5 md:mt-0 md:col-span-2">
               <p className=" text-2xl m-2">Register</p>
           <form onSubmit={
