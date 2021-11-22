@@ -9,6 +9,7 @@ export function useCustomer() {
 }
 function CustomerProvider({children}) {
     const [Customer, setCustomer] = useState({})
+    const [isLoading, setLoading] = useState(true);
     var Usr = localStorage.getItem('User')
     let headers;
     if(Usr) {
@@ -19,12 +20,19 @@ function CustomerProvider({children}) {
     }
     console.log(headers)
     useEffect(() => {
-        axios.get('/api/getCustomerbyToken/',{headers:headers}).then((data)=>{
+        axios.get('/api/GetCustomerbyToken/',{headers:headers}).then((data)=>{
+            console.log(data)
             setCustomer(data.data)
+            setLoading(false)
         }).catch(e=>{
             console.log(e)
         })
     }, [])
+    if(Usr) {   
+        if (isLoading) {
+            return <div className="App">Loading...</div>;
+         }
+    }
     return (
         <CustomerContext.Provider value={Customer}>
                         {children}

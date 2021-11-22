@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import Textfield from "../FormComponents/textfield";
 import axios from "axios";
 import { useSellerId } from "../../Contexts/SellerContext";
+import { useCustomer } from "../../Contexts/CustomerContext";
 
 function Checkout() {
   const products = useCart();
@@ -25,6 +26,8 @@ function Checkout() {
   const [Promo, setPromo] = useState("");
   const [Applied, setApplied] = useState(false)
   let id = useSellerId();
+  let {_id} = useCustomer()
+  console.log(_id)
   return (
     <div>
       <p className="text-left text-2xl m-2">Checkout </p>
@@ -146,12 +149,36 @@ function Checkout() {
 
                     <div className="mt-6  justify-center text-sm text-center text-gray-500">
                       <p>Proceed to Pay</p>
-                      <Link to="#">
-                        <img
+                      <button onClick={(e)=>{
+                        e.preventDefault()
+                         
+                        let productIds = [];
+                         products.map(el=>{
+                          return productIds.push(el._id)
+                        })
+                        console.log(productIds)
+                        let Article = {
+                          Sid : id,
+                          Total : Total,
+                          Products : productIds,
+                          CustId : _id,
+                          Type : 'COD',
+                          
+                        }
+                        console.log(Article)
+                        axios.put('api/PlaceOrder',Article).then(()=>{
+                          alert('Order Placed')
+                          window.location.reload()
+                        }).catch(e=>{
+                          console.log(e)
+                        })
+                      }} className="p-2 bg-lightgreen text-white rounded-md">
+                        Checkout With Cash On Delivery
+                        </button>
+                        {/* <img
                           className="w-1/2 m-auto"
                           src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png"
-                        />
-                      </Link>
+                        /> */}
                     </div>
                   </div>
                 </div>
