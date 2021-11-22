@@ -16,7 +16,7 @@ function ProductPool() {
     return (
         <div className="w-full  m-10">
         <h1 className="text-3xl m-4 text-left">Products</h1>
-        <UnivTable Responses={ProdPool}  />        
+        <UnivTable Responses={ProdPool} />        
     </div>
     )
 }

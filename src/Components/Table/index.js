@@ -2,6 +2,7 @@
 
 export function UnivTable (props) {
   if(props.Responses) {
+    
     if (props.Responses.length>0) {
       let Headers = Object.keys(props.Responses[0])
       return (
