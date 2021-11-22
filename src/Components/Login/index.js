@@ -33,7 +33,8 @@ function Login(props) {
                         localStorage.setItem('User',JSON.stringify(obj))
                     }).then(()=>{
                         alert('Logged In')
-                        window.location.href='/'
+                        window.location.reload()
+                      
                     }).catch((e)=>{
                         alert('Invalid Credentials')
                     })

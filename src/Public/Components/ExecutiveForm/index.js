@@ -59,7 +59,7 @@ function ExecutiveForm() {
               AadharNo : e.target[7].value
           }
           console.log(Article)
-          axios.post("/api/createExecutive",Article).then((data)=>{
+          axios.post("/api/create/Executive",Article).then((data)=>{
               if(data) {
                   alert('Submitted')
               }

@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Logout() {
+function ExeLogout() {
     if(localStorage.getItem('User')) {
         localStorage.removeItem('User')
         alert('Logged Out')
-        window.location.reload()
+        window.location.assign('/admin')
     }
     return (
         <div>
@@ -13,4 +13,4 @@ function Logout() {
     )
 }
 
-export default Logout
+export default ExeLogout

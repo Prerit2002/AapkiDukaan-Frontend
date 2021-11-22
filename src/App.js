@@ -6,6 +6,8 @@ import PublicMain from './Public'
 import Cart from "./Theme1/Components/Cart";
 import axios from 'axios'
 import AdminAD from "./Admin-AD";
+import Executive from "./Components/Executive";
+import AdminE from "./Admin-E";
 function App() {
   axios.defaults.baseURL = 'http://localhost:5000'
   let subDomain  = window.location.host.split('.')[0]
@@ -18,6 +20,8 @@ function App() {
         {
           domainArr.length==1 ? 
           <Routes>
+            
+          <Route path={"/executive/*"} element={<AdminE/>} ></Route> 
           <Route exact path="/*" element={<PublicMain/>} >   </Route>
           <Route path={"/admin/*"} element={<AdminAD/>} ></Route>  
           </Routes>

@@ -8,9 +8,10 @@ import TabsTable from '../Components/TabsTable';
 import AddProduct from '../Components/AddProduct';
 import SellerDataProvider, { useSellerData, useSellerId } from '../Theme1/Contexts/SellerContext';
 import Clients from '../Components/Clients';
-import ProductPool from '../Components/AdminProductPool/index copy';
+import ProductPool from '../Components/AdminProductPool/indexcopy';
 import TokenProvider from '../Admin-S/Contexts/token';
 import Logout from '../Components/Logout';
+import Executive from '../Components/Executive';
 function AdminAD() {
   const Menu = [
     {
@@ -30,8 +31,8 @@ function AdminAD() {
       text: "Bills",
     },    
     {
-      link: "executives",
-      text: "Executives",
+      link: "executive",
+      text: "Executive",
     },
     {
       link: "Logout",
@@ -56,6 +57,7 @@ function AdminAD() {
               <Route exact path="inventory/add" element={<AddProduct />}  ></Route>
               <Route exact path="test" element={<TabsTable />}  ></Route>
               <Route exact path="logout" element={<Logout />}  ></Route>
+              <Route exact path="executive" element={<Executive />}  ></Route>
               <Route exact path="productpool" element={<ProductPool />}  ></Route>
               {/* <Route exact path="Login" element={<Login />}  ></Route> */}
               </Routes>
