@@ -3,9 +3,8 @@ import Sidebar from "../Components/Sidebar";
 
 import Login from '../Components/Login';
 import TabsTable from '../Components/TabsTable';
-import Inventory from '../Components/Inventory';
-import Client from '../Components/Clients';
-import AddProduct from '../Components/AddProduct';
+import ProductPool from '../Components/AdminProductPool/indexcopy';
+import Clients from '../Components/Clients';
 import TokenProvider from '../Admin-S/Contexts/token';
 import SellerDataProvider, { useSellerData, useSellerId } from '../Theme1/Contexts/SellerContext';
 
@@ -15,15 +14,15 @@ function AdminE() {
   const Menu = [
    
     {
-      link: "inventory",
+      link: "productpool",
       text: "Inventory",
     },
  
  
     {
-        link: "Client",
-        text: "Client",
-    },
+      link: "Clients",
+      text: "Leads",
+   },
     {
       link: "Logout",
       text: "Logout",
@@ -39,23 +38,23 @@ function AdminE() {
    
         <div className="p-0 m-0 flex">
           <Sidebar Menu={Menu}/>
+          
+          <TokenProvider>
           {
               User ? 
              
               <Routes>
-              <Route exact path="inventory" element={<Inventory />}  ></Route>
-              <Route exact path="inventory/add" element={<AddProduct />}  ></Route>
+              <Route exact path="productpool" element={<ProductPool/>}  ></Route>
               <Route exact path="test" element={<TabsTable />}  ></Route>
               <Route exact path="logout" element={<Logout />}  ></Route>
-              
-              <Route exact path="Clients" element={<Client />}  ></Route>
+              <Route exact path="Clients" element={<Clients />}  ></Route>
               </Routes> 
               : <Routes>
               <Route path="/*" element={<Login role="Executive"/>}  ></Route>  
                 </Routes>
             }
         
-       
+       </TokenProvider>
   
         </div>
  

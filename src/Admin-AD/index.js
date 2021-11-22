@@ -7,11 +7,11 @@ import Login from '../Components/Login';
 import TabsTable from '../Components/TabsTable';
 import AddProduct from '../Components/AddProduct';
 import SellerDataProvider, { useSellerData, useSellerId } from '../Theme1/Contexts/SellerContext';
-import Clients from '../Components/Clients';
+import Client from '../Components/Clients';
 import ProductPool from '../Components/AdminProductPool/indexcopy';
 import TokenProvider from '../Admin-S/Contexts/token';
 import Logout from '../Components/Logout';
-import Executive from '../Components/Executive';
+import Executive from '../Components/Executive';;
 function AdminAD() {
   const Menu = [
     {
@@ -19,8 +19,8 @@ function AdminAD() {
       text: "Inventory",
     },
     {
-        link: "Clients",
-        text: "Clients",
+        link: "Client",
+        text: "Client",
      },
     {
       link: "Customers",
@@ -51,7 +51,7 @@ function AdminAD() {
               User ? 
               <Routes>
               <Route exact path="Customers" element={<Customers />}  ></Route>
-              <Route exact path="Clients" element={<Clients />}  ></Route>
+              <Route exact path="Client" element={<Client />}  ></Route>
               <Route exact path="bills" element={<Bills />}  ></Route>
               <Route exact path="inventory" element={<Inventory />}  ></Route>
               <Route exact path="inventory/add" element={<AddProduct />}  ></Route>

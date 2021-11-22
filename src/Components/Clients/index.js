@@ -21,7 +21,8 @@ function Client() {
                        PersonalDetails : JSON.stringify(el.PersonalDetails),
                        WebsiteData : JSON.stringify(el.WebsiteData),
                        PromoCode : JSON.stringify(el.PromoCode),
-                       Products : JSON.stringify(el.Products)
+                       Products : JSON.stringify(el.Products),
+                       Sales : JSON.stringify(el.Sales)
                    }
                )
            })
