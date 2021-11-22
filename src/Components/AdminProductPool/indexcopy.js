@@ -4,11 +4,12 @@ import { JsonToTable } from "react-json-to-table";
 import axios from 'axios';
 import { useToken } from '../../Admin-S/Contexts/token';
 function ProductPool() {
-    const [ProdPool, setProdPool] = useState({
-    })
+    const [ProdPool, setProdPool] = useState(
+    )
     let headers = useToken()
     useEffect(() => {
        axios.get("/api/showProduct",{headers: headers}).then(data=>{
+           console.log(data.data)
         setProdPool(data.data)
        })
     }, [])
@@ -16,7 +17,7 @@ function ProductPool() {
         <div className="w-full  m-10">
         <h1 className="text-3xl m-4 text-left">Products</h1>
         
-        <UnivTable responses={ProdPool} />        
+        <UnivTable Responses={ProdPool}  />        
     </div>
     )
 }
