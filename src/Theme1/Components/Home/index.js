@@ -12,6 +12,7 @@ function Home(props) {
                     return (
                         <Row Category={element}/>
                     )
+                    
                 })
             }
         </div>
